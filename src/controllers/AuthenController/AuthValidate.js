@@ -2,13 +2,13 @@ const userModel = require("../../models/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const saltRounds = 10;
-
+const Ck_ConstantCommon = require('../../commons/Constant.Common')
 module.exports.checkLogin = async function (email, password) {
   const user = await userModel.findOne({ System_UserEmail: email });
 
   if (!user) {
     return {
-      success: 0,
+      success: Ck_ConstantCommon.CK_RESULTS.DATA_EXIST,
       message: "Invalid user into the system!",
     };
   } else {
@@ -19,7 +19,7 @@ module.exports.checkLogin = async function (email, password) {
 
     if (!isCheckingPassword) {
       return {
-        success: 1,
+        success: Ck_ConstantCommon.CK_RESULTS.ERROR,
         message: "Wrong information of member",
       };
     } else {
@@ -33,7 +33,7 @@ module.exports.checkLogin = async function (email, password) {
         expiresIn: process.env.JWT_EXPIRE,
       });
       return {
-        success: 1,
+        success: Ck_ConstantCommon.CK_RESULTS.SUCCESS,
         access_token: access_token,
         data: {
           name: user.System_User_Name,
@@ -65,7 +65,7 @@ module.exports.checkBeforeRegister = async function (
     });
 
     return {
-      success: 1,
+      success: Ck_ConstantCommon.CK_RESULTS.SUCCESS,
       message: "Create user successfully",
       results,
     };
