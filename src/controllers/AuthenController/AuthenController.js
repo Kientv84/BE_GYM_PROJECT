@@ -1,4 +1,4 @@
-const userModel = require("../../models/UserModel");
+const userModel = require("../../models/User/UserModel");
 const { checkLogin, checkBeforeRegister } = require("./AuthValidate");
 
 module.exports.handleLogin = async function (req, res) {

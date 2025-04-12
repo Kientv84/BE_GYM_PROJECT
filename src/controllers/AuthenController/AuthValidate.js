@@ -1,8 +1,8 @@
-const userModel = require("../../models/UserModel");
+const userModel = require("../../models/User/UserModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const saltRounds = 10;
-const Ck_ConstantCommon = require('../../commons/Constant.Common')
+const Ck_ConstantCommon = require("../../commons/Constant.Common");
 module.exports.checkLogin = async function (email, password) {
   const user = await userModel.findOne({ System_UserEmail: email });
 
