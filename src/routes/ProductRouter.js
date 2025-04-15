@@ -9,8 +9,8 @@ module.exports = function (app) {
   app.delete("/product/delete", productController.delete);
 
   //// product type
-  app.get("productType/getAll", productTypeController.getAllType);
-  app.post("productType/create", productTypeController.create);
+  app.get("/productType/getAll", productTypeController.getAllType);
+  app.post("/productType/create", productTypeController.create);
   app.post("/productType/update", productTypeController.update);
   app.delete("/productType/delete", productTypeController.delete);
 };
