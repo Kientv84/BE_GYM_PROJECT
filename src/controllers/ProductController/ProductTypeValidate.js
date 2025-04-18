@@ -26,7 +26,7 @@ module.exports.checkBeforeCreate = async function (model) {
 
 module.exports.checkBeforeUpdate = async function (models) {
   try {
-    const items = await product.find({
+    const items = await productType.find({
       _id: models._id,
     });
 

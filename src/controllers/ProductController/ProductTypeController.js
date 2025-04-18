@@ -67,6 +67,36 @@ module.exports.update = async function (req, res) {
     const isCheckBeforeUpdate = await checkBeforeUpdate(models);
 
     if (isCheckBeforeUpdate == Ck_ConstantCommon.CK_RESULTS.SUCCESS) {
+      const newValuesUpdate = {
+        System_Product_Type_Name: models.System_Product_Type_Name,
+        System_Product_Type_Code: models.System_Product_Type_Code,
+        System_Product_Type_Description: models.System_Product_Type_Description,
+      };
+
+      try {
+        const itemUpdate = await productType.findOneAndUpdate(
+          query,
+          { $set: newValuesUpdate },
+          { new: true }
+        );
+        if (itemUpdate) {
+          return res.status(200).json({
+            success: Ck_ConstantCommon.CK_RESULTS.SUCCESS,
+            data: itemUpdate,
+            message: "update product type success",
+          });
+        } else {
+          return res.status(404).json({
+            success: Ck_ConstantCommon.CK_RESULTS.ERROR,
+            message: "Update product fail",
+          });
+        }
+      } catch {}
+    } else {
+      return res.status(200).send({
+        success: Ck_ConstantCommon.CK_RESULTS.ERROR,
+        message: "update product type fail",
+      });
     }
   }
 };
