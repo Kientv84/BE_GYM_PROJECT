@@ -9,11 +9,31 @@ const requireProduct = require("../ProductController/ProductRequire");
 const Ck_ConstantCommon = require("../../commons/Constant.Common");
 
 module.exports.getAllProduct = async function (req, res) {
-  console.log("đã vào product controller");
+  const { limit, page, language } = req.query;
 
-  const { limit, page, language } = req.body;
+  const skip = (page - 1) * limit;
 
-  const data = await this.checkBeforeGetAllProduct(limit, page, language);
+  try {
+    const data = await ProductSchema.find({})
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+
+    if (data) {
+      return res.status(200).json({
+        success: Ck_ConstantCommon.CK_RESULTS.SUCCESS,
+        result: data,
+        message: "get all product successfully",
+      });
+    } else {
+      return res.status(400).send({
+        success: Ck_ConstantCommon.CK_RESULTS.ERROR,
+        message: "Get all product fail",
+      });
+    }
+  } catch (err) {
+    console.log("err", err);
+  }
 
   return res.status(200).json(data);
 };

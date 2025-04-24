@@ -32,4 +32,4 @@ module.exports.checkBeforeUpdate = async function (_id) {
   }
 };
 
-module.exports.checkBeforeGetAllProduct = () => {};
+// module.exports.checkBeforeGetAllProduct = () => {};

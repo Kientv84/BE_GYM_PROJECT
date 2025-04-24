@@ -5,7 +5,7 @@ const productCategoryController = require("../controllers/ProductController/Prod
 
 module.exports = function (app) {
   console.log("đã vào product router");
-  app.get("product/getAll", productController.getAllProduct);
+  app.get("/product/getAll", productController.getAllProduct);
   app.post("/product/create", productController.create);
   app.post("/product/update", productController.update);
   app.delete("/product/delete", productController.delete);
